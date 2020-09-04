@@ -1,8 +1,8 @@
-let text = document.getElementById('input');
-let list = document.getElementById('list');
+let input = document.querySelector('.input');
+let ul = document.querySelector('ul');
 
 function onClickDelete(e) {
-    list.childNodes.forEach((obj)=>{
+    ul.childNodes.forEach((obj)=>{
         if(obj === e.target.parentNode){
             obj.remove();
         }
@@ -10,9 +10,9 @@ function onClickDelete(e) {
 }
 
 function onClickComplete(e){
-    list.childNodes.forEach((obj)=>{
+    ul.childNodes.forEach((obj)=>{
         if(obj === e.target.parentNode){
-            obj.style.textDecoration = 'line-through red'
+            obj.classList.add('complete');
             e.target.remove();
         }
     })
@@ -20,18 +20,18 @@ function onClickComplete(e){
 
 function onSubmitForm(e) {
     e.preventDefault();
-    let myElement = document.createElement('li');
-    let myBtn = document.createElement('button');
-    let myBtn2 = document.createElement('button');
-    myBtn.onclick = onClickDelete;
-    myBtn2.onclick = onClickComplete;
-    myBtn.innerText = '삭제';
-    myBtn2.innerText = '완료';
-    myElement.innerText = text.value;
-    myElement.append(myBtn);
-    myElement.append(myBtn2);
-    list.append(myElement);
-    text.value = '';
+    let li = document.createElement('li');
+    let deleteBtn = document.createElement('button');
+    let completeBtn = document.createElement('button');
+    deleteBtn.onclick = onClickDelete;
+    completeBtn.onclick = onClickComplete;
+    deleteBtn.innerText = '삭제';
+    completeBtn.innerText = '완료';
+    li.innerText = input.value;
+    li.appendChild(deleteBtn);
+    li.appendChild(completeBtn);
+    ul.appendChild(li);
+    input.value = '';
 }
 
-document.getElementById('form').onsubmit = onSubmitForm;
+document.querySelector('.form').onsubmit = onSubmitForm;

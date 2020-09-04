@@ -1,0 +1,78 @@
+html {    
+    background: url('./background.jpg') no-repeat center fixed;     
+    background-size: cover;
+}
+
+.container{
+    text-align: center;
+}
+
+.clock{
+    display: inline-block;
+    margin-top: 100px;
+    color: white;
+}
+
+.hm{
+    font-size: 155px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.seconds{
+    display: inline-block;
+    font-size: 48px;
+    width: 60px;
+}
+
+.days{
+    color: white;
+    font-size: 25px;
+}
+
+.todos{
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 400px;
+}
+
+
+.input{
+    border: none;
+    width: 250px;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+
+
+.btn {
+    background-color: #82E0AA;
+    color: white;
+    width:27px;
+    height:27px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 100;
+    border : none;
+  }
+
+
+ul{
+    list-style: none;
+    padding: 0px;
+}
+
+li{
+    border: none;
+    background-color: white;
+    margin: 5px;
+}
+
+.complete {
+    color: gray;
+    text-decoration: line-through ;
+}
