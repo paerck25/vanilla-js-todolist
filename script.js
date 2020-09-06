@@ -15,11 +15,11 @@ function onClickDelete(e) {
 }
 
 function onClickComplete(e){
-    ul.childNodes.forEach((obj)=>{
-        if(obj === e.target.parentNode){
-            obj.classList.add('complete');
-        }
-    })
+    if(e.target.checked){
+        e.target.parentNode.classList.add('complete');
+    } else {
+        e.target.parentNode.classList.remove('complete');
+    }
 }
 
 function createCheckBox(){
@@ -27,6 +27,7 @@ function createCheckBox(){
     completeCheckBox.type = 'checkbox';
     completeCheckBox.id = `check${ul.childElementCount}`;
     completeCheckBox.className = 'check';
+    completeCheckBox.onchange = onClickComplete;
     return completeCheckBox;
 }
 
