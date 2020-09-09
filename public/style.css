@@ -109,7 +109,7 @@ li:hover{
     cursor: pointer;
 }
 
-.complete .textLabel{
+.complete{
     color: gray;
     text-decoration: line-through ;
 }
