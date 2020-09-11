@@ -21,7 +21,9 @@ function closModal(){
     modal.classList.remove('open');
 }
 
-function modalRender(todos){
+function modalRender(date,todos){
+    document.querySelector('.modal-header').innerHTML = `<h2 style="text-align:center">${date}</h2>`
+
     document.querySelector('.modal-content-list').innerHTML = todos.map((obj, index) => {
         if (obj.complete) {
             return (
@@ -43,7 +45,7 @@ function getListInDate(e){
     fetch(`./data/${date}.json`)
         .then(res => res.json())
         .then(response => {
-            modalRender(response);
+            modalRender(date,response);
             openModal();
         })
         .catch((err)=>{
