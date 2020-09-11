@@ -13,42 +13,42 @@ let lastDate = new Date(nowYear, nowMonth + 1, 0);
 
 const modal = document.querySelector('.modal');
 
-function openModal(){
+function openModal() {
     modal.classList.add('open');
 }
 
-function closModal(){
+function closModal() {
     modal.classList.remove('open');
 }
 
-function modalRender(date,todos){
+function modalRender(date, todos) {
     document.querySelector('.modal-header').innerHTML = `<h2 style="text-align:center">${date}</h2>`
 
     document.querySelector('.modal-content-list').innerHTML = todos.map((obj, index) => {
         if (obj.complete) {
             return (
-                `<li>
-                <label class="complete" for="check_${index}">${obj.text}</label>
+                `<li class="complete">
+                ${obj.text}
                 </li>`
             )
         }
         return (
             `<li>
-            <label for="check_${index}">${obj.text}</label>
+            ${obj.text}
             </li>`
         )
     }).join("");
 }
 
-function getListInDate(e){
+function getListInDate(e) {
     const date = `${nowYear}-${nowMonth + 1}-${e.target.innerText}`;
     fetch(`./data/${date}.json`)
         .then(res => res.json())
         .then(response => {
-            modalRender(date,response);
+            modalRender(date, response);
             openModal();
         })
-        .catch((err)=>{
+        .catch((err) => {
             alert(`Error! : 데이터가 존재하지 않습니다. \n ${err}`)
         });
 }
@@ -82,7 +82,7 @@ function createCalendar() {
     }
     calendarHeader.innerText = `${nowYear}년 ${nowMonth + 1}월`
     dateOfMonth.innerHTML = dateList.join("");
-    document.querySelectorAll('.date').forEach((node)=>{
+    document.querySelectorAll('.date').forEach((node) => {
         node.addEventListener('click', getListInDate);
     })
 }
@@ -118,4 +118,4 @@ createCalendar();
 document.querySelector('.prev').addEventListener('click', prevMonth);
 document.querySelector('.next').addEventListener('click', nextMonth);
 document.querySelector('.refresh-icon').addEventListener('click', refresh);
-document.querySelector('.modal-backdrop').addEventListener('click',closModal);
+document.querySelector('.modal-backdrop').addEventListener('click', closModal);
