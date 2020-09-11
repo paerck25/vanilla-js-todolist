@@ -1,0 +1,242 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+html {
+    background: url('../img/background.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.calendar-icon-container{
+    padding: 50px;
+}
+
+.calendar-icon{
+    width: 40px;
+    height: 40px;
+    float: right;
+    fill: white;
+}
+
+.calendar-icon:hover{
+    cursor: pointer;
+    fill: #82E0AA;
+}
+
+.item1{
+    display: inline-block;
+    width: 100%;
+    margin-top: 3%;
+    transition: all 0.5s;
+}
+
+.item2{
+    display: inline-block;
+    position: fixed;
+    width: 45%;
+    margin-top: 3%;
+    background-color: rgba(58, 69, 121, 0.8);
+    color: white;
+    border-radius: 30px;
+    padding: 40px;
+}
+
+.item1.shown{
+    width: 45%;
+}
+
+/* layout */
+
+.time{
+    text-align: center;
+    color: white;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hm{
+    font-size: 155px;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.seconds{
+    display: inline-block;
+    font-size: 48px;
+    width: 60px;
+}
+
+.days{
+    color: white;
+    font-size: 25px;
+}
+
+/* clock */
+
+.todos{
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 300px;
+    padding: 30px;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input{
+    outline: none;
+    border: none;
+    width: 250px;
+    border-radius: 15px;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.btn {
+    background-color: #82E0AA;
+    color: white;
+    width:27px;
+    height:27px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 100;
+    border : none;
+    margin-left: 5px;
+}
+
+ul{
+    list-style: none;
+    margin: 30px auto;
+    padding: 0px;
+    width: 59%;
+    height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+ul::-webkit-scrollbar{
+    display: none;
+}
+
+li{
+    display: grid;
+    grid-template-columns: 30px auto 30px;
+    color: white;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+li:hover{
+    background-color: rgba( 97, 106, 107, 0.5 );
+}
+
+.check{
+    width: 18px;
+    height: 18px;
+    margin: 4px auto;
+}
+.textLabel{
+    margin: 0px auto;
+}
+
+.deleteBtn {
+    width: 18px;
+    height: 18px;
+    font-size: 20px;
+    font-weight: 100;
+    margin : 3px auto;
+}
+
+.deleteBtn:hover{
+    cursor: pointer;
+    color: coral;
+}
+
+.complete{
+    color: gray;
+    text-decoration: line-through ;
+}
+
+/* todos */
+
+.calendar > header {
+    display: flex;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.calendar label{
+    margin: auto;
+}
+
+.prev:hover{
+    cursor: pointer;
+    color: #82E0AA;
+}
+
+.next:hover{
+    cursor: pointer;
+    color: #82E0AA;
+}
+
+.refresh-container{
+    width: 35px;
+    height: 35px;
+}
+
+.refresh-icon{
+    width: 35px;
+    height: 35px;
+    margin-top: 1px;
+    fill: white;
+    transition: all 0.1s;
+}
+
+.refresh-icon:hover{
+    cursor: pointer;
+    fill: #82E0AA;
+}
+
+.refresh-icon:active{
+    width: 33px;
+    height: 33px;
+}
+
+.dayOfWeek{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 25px;
+}
+
+.dayOfWeek > div{
+    margin: auto;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.weekend{
+    color: red;
+}
+
+.today{
+    color:#82E0AA;
+}
+
+.dateOfMonth{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.dateOfMonth > div{
+    margin: 32px auto;
+    font-size: 25px;
+    font-weight: 600;
+}

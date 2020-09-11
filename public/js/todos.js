@@ -29,39 +29,53 @@ function render() {
         if (obj.complete) {
             return (
                 `<li>
-                <input class="check" type="checkbox" id="check_${index}" value="${obj.text}" checked="true">
+                <input class="check" type="checkbox" id="check_${index}" checked="true">
                 <label class="textLabel complete" for="check_${index}">${obj.text}</label>
-                <div data-text="${obj.text}" class="deleteBtn">×</div>
+                <div class="deleteBtn" id="delete_${index}">×</div>
                 </li>`
             )
         }
         return (
             `<li>
-            <input class="check" type="checkbox" id="check_${index}" value="${obj.text}">
+            <input class="check" type="checkbox" id="check_${index}">
             <label class="textLabel" for="check_${index}">${obj.text}</label>
-            <div data-text="${obj.text}" class="deleteBtn">×</div>
+            <div class="deleteBtn" id="delete_${index}">×</div>
             </li>`
         )
     }).join("");
-    for (let i = 0; i < todos.length; i++) {
-        document.querySelectorAll('.check')[i].addEventListener('change', onClickComplete);
-        document.querySelectorAll('.deleteBtn')[i].addEventListener('click', onClickDelete);
-    }
+    document.querySelectorAll('.check').forEach((node)=>{
+        node.addEventListener('change', onClickComplete);
+    })
+    document.querySelectorAll('.deleteBtn').forEach((node)=>{
+        node.addEventListener('click', onClickDelete);
+    })
+}
+
+function getTodos() {
+    const now = new Date();
+    const date = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+    fetch(`./data/${date}.json`)
+        .then(res => res.json())
+        .then(response => {
+            todos = response;
+            render();
+        })
+        .catch(error => console.error('Error:', error));
 }
 
 function onClickDelete(e) {
-    const text = e.target.dataset.text
-    todos = todos.filter((obj) => {
-        return obj.text !== text
+    const id = e.target.id;
+    todos = todos.filter((obj,index) => {
+        return `delete_${index}` !== id
     })
     saveTodos();
     render();
 }
 
 function onClickComplete(e) {
-    const text = e.target.value
-    todos = todos.map((obj) => {
-        if (obj.text === text) {
+    const id = e.target.id;
+    todos = todos.map((obj,index) => {
+        if (`check_${index}` === id) {
             obj.complete = !obj.complete;
         }
         return obj;
@@ -85,5 +99,6 @@ function onSubmitForm(e) {
     }
 }
 
+getTodos();
 form.addEventListener('submit', onSubmitForm);
 
