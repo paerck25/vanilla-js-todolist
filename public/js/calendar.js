@@ -24,6 +24,10 @@ function closModal() {
 function modalRender(date, todos) {
     document.querySelector('.modal-header').innerHTML = `<h2 style="text-align:center">${date}</h2>`
 
+    if(todos.length === 0){
+        return document.querySelector('.modal-content-list').innerHTML = `<li>데이터가 존재하지 않습니다.</li>`
+    }
+    
     document.querySelector('.modal-content-list').innerHTML = todos.map((obj, index) => {
         if (obj.complete) {
             return (
@@ -46,11 +50,14 @@ function getListInDate(e) {
         .then(res => res.json())
         .then(response => {
             modalRender(date, response);
-            openModal();
         })
         .catch((err) => {
-            alert(`Error! : 데이터가 존재하지 않습니다. \n ${err}`)
-        });
+            console.log(`Error! : 데이터가 존재하지 않습니다. \n ${err}`);
+            modalRender(date, []);
+        })
+        .finally(()=>{
+            openModal();
+        })
 }
 
 function createCalendar() {

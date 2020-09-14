@@ -5,25 +5,6 @@ let ul = document.querySelector('ul');
 
 let todos = [];
 
-function saveTodos() {
-    const now = new Date();
-    let data = {
-        date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
-        todos: todos
-    };
-    console.log(data);
-    fetch('http://localhost:4000/todo', {
-        method: 'post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => res.text())
-        .then(response => console.log('Success:', response))
-        .catch(error => console.error('Error:', error));
-}
-
 function render() {
     ul.innerHTML = todos.map((obj, index) => {
         if (obj.complete) {
@@ -43,13 +24,56 @@ function render() {
             </li>`
         )
     }).join("");
-    document.querySelectorAll('.check').forEach((node)=>{
+    document.querySelectorAll('.check').forEach((node) => {
         node.addEventListener('change', onClickComplete);
     })
-    document.querySelectorAll('.deleteBtn').forEach((node)=>{
+    document.querySelectorAll('.deleteBtn').forEach((node) => {
         node.addEventListener('click', onClickDelete);
     })
 }
+
+function saveTodos() {
+    const now = new Date();
+    let data = {
+        date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
+        todos: todos
+    };
+    console.log(data);
+    fetch('http://localhost:4000/todo', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.text())
+        .then(response => {
+            console.log('Success:', response)
+            render();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function deleteTodos() {
+    const now = new Date();
+    let data = {
+        date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
+    };
+    fetch('http://localhost:4000/delete', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.text())
+        .then(response => {
+            console.log('Success:', response)
+            render();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 
 function getTodos() {
     const now = new Date();
@@ -65,23 +89,24 @@ function getTodos() {
 
 function onClickDelete(e) {
     const id = e.target.id;
-    todos = todos.filter((obj,index) => {
+    todos = todos.filter((obj, index) => {
         return `delete_${index}` !== id
     })
+    if(todos.length === 0){
+        return deleteTodos();
+    }
     saveTodos();
-    render();
 }
 
 function onClickComplete(e) {
     const id = e.target.id;
-    todos = todos.map((obj,index) => {
+    todos = todos.map((obj, index) => {
         if (`check_${index}` === id) {
             obj.complete = !obj.complete;
         }
         return obj;
     })
     saveTodos();
-    render();
 }
 
 function onSubmitForm(e) {
@@ -92,7 +117,6 @@ function onSubmitForm(e) {
             complete: false,
         })
         saveTodos();
-        render();
         input.value = '';
     } else {
         e.preventDefault();

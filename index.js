@@ -10,11 +10,23 @@ const saveTodoJson = (todo,callback) => {
     fs.writeFile(`./public/data/${todo.date}.json`, JSON.stringify(todo.todos), callback);
 }
 
+const deleteTodoJson = (date,callback) => {
+    fs.unlink(`./public/data/${date}.json`,callback);
+}
+
 app.post('/todo',(req,res)=>{
     console.log(req.body);
     saveTodoJson(req.body,(err)=>{
         if(err) return console.log(err);
         res.send('저장 완료');
+    })
+})
+
+app.post('/delete',(req,res)=>{
+    console.log(req.body);
+    deleteTodoJson(req.body.date,(err)=>{
+        if(err) return console.log(err);
+        res.send('삭제');
     })
 })
 
