@@ -39,7 +39,7 @@ function saveTodos() {
         todos: todos
     };
     console.log(data);
-    fetch('http://localhost:4000/todo', {
+    fetch('/todo', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ function deleteTodos() {
     let data = {
         date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
     };
-    fetch('http://localhost:4000/delete', {
+    fetch('/delete', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
