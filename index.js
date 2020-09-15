@@ -30,6 +30,8 @@ app.post('/delete',(req,res)=>{
     })
 })
 
-app.listen(4000,()=>{
-    console.log('Server is Running.. http://localhost:4000');
+const port = process.env.PORT || 8080;
+
+app.listen(port,()=>{
+    console.log(`Server is Running.. http://localhost:${port}`);
 })
